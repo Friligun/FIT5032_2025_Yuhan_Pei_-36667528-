@@ -1,12 +1,25 @@
 <script setup>
-// import JSON from "./components/JSON.vue"
-import Form from "./components/Form.vue";
+import NavBar from './components/NavBar.vue'
+import FooterBar from './components/FooterBar.vue'
 </script>
 
 <template>
-  <!-- <JSON /> -->
-  <Form />
+  <div id="app-wrapper">
+    <NavBar />
+    <main class="flex-grow-1">
+      <router-view />
+    </main>
+    <FooterBar />
+  </div>
 </template>
 
-<style scoped>
+<style>
+#app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
 </style>

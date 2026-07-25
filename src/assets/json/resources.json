@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "Managing Type 2 Diabetes",
+    "category": "Chronic Conditions",
+    "description": "A comprehensive guide to diet, exercise and medication management for seniors living with Type 2 Diabetes.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8f4f8/0d6efd?text=Diabetes+Guide"
+  },
+  {
+    "id": 2,
+    "title": "Mental Wellness in Later Life",
+    "category": "Mental Wellness",
+    "description": "Strategies for maintaining emotional health and social connections as you age. Includes mindfulness techniques and support resources.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/f0e8f8/6f42c1?text=Mental+Wellness"
+  },
+  {
+    "id": 3,
+    "title": "Nutrition Guide for Seniors",
+    "category": "Nutrition",
+    "description": "Evidence-based dietary recommendations for over 65s. Covers vitamins, hydration, and meal planning.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8f8e8/198754?text=Nutrition+Guide"
+  },
+  {
+    "id": 4,
+    "title": "Exercise for Healthy Ageing",
+    "category": "Exercise",
+    "description": "Low-impact routines suitable for all fitness levels. Includes chair exercises, walking programs and balance training.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/f8f0e8/fd7e14?text=Exercise+Guide"
+  },
+  {
+    "id": 5,
+    "title": "Heart Health Fact Sheet",
+    "category": "Chronic Conditions",
+    "description": "Downloadable PDF with key tips for heart health, blood pressure management, and when to seek emergency care.",
+    "type": "factsheet",
+    "image": "https://placehold.co/400x200/f8e8e8/dc3545?text=Heart+Health"
+  },
+  {
+    "id": 6,
+    "title": "Understanding Dementia",
+    "category": "Mental Wellness",
+    "description": "Information for patients and carers about early signs, diagnosis, and living well with dementia.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/f0e8f8/6f42c1?text=Dementia+Info"
+  },
+  {
+    "id": 7,
+    "title": "Fall Prevention at Home",
+    "category": "Safety",
+    "description": "Practical tips to make your home safer and reduce fall risk. Covers lighting, floor surfaces, and bathroom modifications.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8f4f8/0d6efd?text=Fall+Prevention"
+  },
+  {
+    "id": 8,
+    "title": "Healthy Sleep for Older Adults",
+    "category": "Wellness",
+    "description": "Tips for improving sleep quality, managing insomnia, and understanding how sleep needs change with age.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8e8f8/0d6efd?text=Sleep+Guide"
+  },
+  {
+    "id": 9,
+    "title": "Managing Arthritis Pain",
+    "category": "Chronic Conditions",
+    "description": "Techniques for pain management including gentle exercises, heat therapy, and medication options.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/f8f0e8/fd7e14?text=Arthritis+Care"
+  },
+  {
+    "id": 10,
+    "title": "Staying Connected: Technology Guide",
+    "category": "Wellness",
+    "description": "A beginner-friendly guide to using smartphones, video calls, and social media to stay in touch with family.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8f8e8/198754?text=Tech+Guide"
+  },
+  {
+    "id": 11,
+    "title": "Medication Safety Tips",
+    "category": "Safety",
+    "description": "How to manage multiple medications safely, including storage, scheduling, and avoiding interactions.",
+    "type": "factsheet",
+    "image": "https://placehold.co/400x200/f8e8e8/dc3545?text=Medication+Safety"
+  },
+  {
+    "id": 12,
+    "title": "Bone Health and Osteoporosis",
+    "category": "Chronic Conditions",
+    "description": "Understanding bone density loss, calcium requirements, and weight-bearing exercises for stronger bones.",
+    "type": "article",
+    "image": "https://placehold.co/400x200/e8f4f8/0d6efd?text=Bone+Health"
+  }
+]

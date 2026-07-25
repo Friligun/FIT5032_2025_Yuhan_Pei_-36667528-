@@ -1,0 +1,129 @@
+/* HealthBridge Responsive Styles
+   Covers: <576px, 576-768px, 768-992px, 992-1200px, 1200-1400px, >1400px */
+
+/* === Extra Small: <576px (Mobile portrait) === */
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  h1, .display-5 {
+    font-size: 1.75rem !important;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .btn-lg {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  footer .row > div {
+    text-align: center;
+  }
+
+  footer .text-md-end {
+    text-align: center !important;
+  }
+}
+
+/* === Small: 576px - 767px (Mobile landscape) === */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  h1, .display-5 {
+    font-size: 2rem !important;
+  }
+
+  .card-img-top {
+    height: 150px;
+    object-fit: cover;
+  }
+}
+
+/* === Medium: 768px - 991px (Tablet) === */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+}
+
+/* === Large: 992px - 1199px (Small desktop) === */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container {
+    max-width: 960px;
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+}
+
+/* === Extra Large: 1200px - 1399px (Desktop) === */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* === XXL: ≥1400px (Large desktop) === */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+/* === General responsive utilities === */
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Table responsive wrapper for admin */
+.card-body .p-datatable {
+  overflow-x: auto;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 767.98px) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .nav-link {
+    padding: 0.75rem 1rem;
+  }
+
+  .form-control, .form-select {
+    min-height: 44px;
+    font-size: 16px; /* Prevent iOS zoom on input focus */
+  }
+
+  .pagination .page-link {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
