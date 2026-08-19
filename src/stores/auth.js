@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import { externalAuthRequest, isExternalAuthConfigured } from '../services/cloud'
 
 // ===== SECURITY: XSS Sanitization =====
 export function sanitize(str) {
@@ -165,6 +166,16 @@ export async function register({ fullName, email, password, role }) {
   const sanitizedName = sanitize(fullName.trim())
   const sanitizedEmail = sanitize(email.trim().toLowerCase())
 
+  if (isExternalAuthConfigured()) {
+    try {
+      const result = await externalAuthRequest('register', { fullName: sanitizedName, email: sanitizedEmail, password, role })
+      if (result.success !== false) return { success: true, message: result.message || 'Registration successful.' }
+      return { success: false, message: result.message || 'Registration failed.' }
+    } catch {
+      return { success: false, message: 'External authentication is temporarily unavailable.' }
+    }
+  }
+
   if (state.users.find(u => u.email === sanitizedEmail)) {
     return { success: false, message: 'Email already registered.' }
   }
@@ -192,6 +203,19 @@ export async function login(email, password) {
   if (!emailCheck.valid) return { success: false, message: emailCheck.message }
 
   const sanitizedEmail = sanitize(email.trim().toLowerCase())
+
+  if (isExternalAuthConfigured()) {
+    try {
+      const result = await externalAuthRequest('login', { email: sanitizedEmail, password })
+      if (!result.success || !result.user) return { success: false, message: result.message || 'Invalid credentials.' }
+      state.currentUser = { ...result.user, sessionToken: result.sessionToken || generateSessionToken(), loginAt: new Date().toISOString() }
+      saveCurrentUser()
+      return { success: true, message: result.message || 'Login successful.', user: state.currentUser }
+    } catch {
+      return { success: false, message: 'External authentication is temporarily unavailable.' }
+    }
+  }
+
   const hashedPwd = await hashPassword(password)
 
   let matchedUser = state.users.find(u => u.email === sanitizedEmail && u.passwordHash === hashedPwd)

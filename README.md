@@ -36,3 +36,18 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## A3 cloud configuration
+
+Copy `.env.example` to `.env.local` and set `VITE_ALIYUN_FUNCTION_URL` to an Alibaba Cloud Function Compute/API Gateway endpoint. The endpoint accepts `{ action, payload }` and is used for appointment confirmation email and the resource assistant. Keep Alibaba credentials in the server-side function; never place access keys in this Vue application.
+
+The app includes local demo fallbacks so the appointment, export, map and assistant workflows remain demonstrable before cloud credentials are configured. Upload the generated `dist` folder to Alibaba Cloud OSS static website hosting, enable HTTPS, and configure SPA fallback so unknown routes serve `index.html`.
+
+### A3 feature map
+
+- D2/E1: `src/services/cloud.js` calls the serverless endpoint for email and assistant actions.
+- D3: Admin has interactive user and appointment tables with sorting, pagination and CSV export.
+- E2: `ServicesView.vue` provides service search, geolocation and map directions.
+- E3/F3: keyboard focus styles, labelled forms, responsive layout and production Service Worker caching.
+- E4: appointment and user records can be exported as CSV without passwords.
+- F1/F2/F4: appointment booking, live admin activity metrics and the resource assistant.

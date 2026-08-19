@@ -6,11 +6,17 @@ import LoginView from '../views/LoginView.vue'
 import MyAccountView from '../views/MyAccountView.vue'
 import AdminView from '../views/AdminView.vue'
 import AboutView from '../views/AboutView.vue'
+import AppointmentsView from '../views/AppointmentsView.vue'
+import ServicesView from '../views/ServicesView.vue'
+import AssistantView from '../views/AssistantView.vue'
 import { getCurrentUser } from '../stores/auth'
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/resources', name: 'Resources', component: ResourcesView },
+  { path: '/services', name: 'Services', component: ServicesView },
+  { path: '/appointments', name: 'Appointments', component: AppointmentsView, meta: { requiresAuth: true } },
+  { path: '/assistant', name: 'Assistant', component: AssistantView },
   { path: '/community/rate', name: 'RateService', component: RateServiceView },
   { path: '/login', name: 'Login', component: LoginView },
   {

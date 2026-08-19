@@ -27,12 +27,12 @@
             <p class="text-muted">Track your health information and saved resources.</p>
             <hr />
             <h6>Saved Resources</h6>
-            <p class="text-muted small">You haven't saved any resources yet. Browse our
-              <router-link to="/resources">Health Resources</router-link> to get started.
-            </p>
+            <p class="text-muted small" v-if="!savedResources.length">You haven't saved any resources yet. Browse our <router-link to="/resources">Health Resources</router-link> to get started.</p>
+            <ul v-else class="small ps-3"><li v-for="resource in savedResources" :key="resource.id">{{ resource.title }}</li></ul>
             <hr />
             <h6>My Appointments</h6>
-            <p class="text-muted small">No upcoming appointments.</p>
+            <p class="text-muted small" v-if="!currentAppointments.length">No upcoming appointments.</p>
+            <ul v-else class="small ps-3"><li v-for="appointment in currentAppointments" :key="appointment.id">{{ appointment.serviceName }} - {{ appointment.date }} {{ appointment.time }}</li></ul>
           </div>
         </div>
 
@@ -66,6 +66,8 @@
 <script setup>
 import { computed } from 'vue'
 import { authState } from '../stores/auth'
+import { currentAppointments, healthState } from '../stores/healthbridge'
+import resourcesData from '../assets/json/resources.json'
 
 const user = computed(() => authState.currentUser)
 
@@ -78,4 +80,5 @@ const roleBadgeClass = computed(() => {
   const classes = { user: 'bg-info', carer: 'bg-success', admin: 'bg-danger' }
   return classes[user.value?.role] || 'bg-secondary'
 })
+const savedResources = computed(() => resourcesData.filter(resource => healthState.savedResources.includes(resource.id)))
 </script>

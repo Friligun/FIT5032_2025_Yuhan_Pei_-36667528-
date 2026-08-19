@@ -35,10 +35,11 @@
             <h5 class="card-title">{{ resource.title }}</h5>
             <span class="badge bg-secondary mb-2 align-self-start">{{ resource.category }}</span>
             <p class="card-text text-muted flex-grow-1">{{ resource.description }}</p>
-            <button v-if="resource.type === 'factsheet'" class="btn btn-outline-primary btn-sm">
-              Download PDF ↓
-            </button>
-            <button v-else class="btn btn-primary btn-sm">Read More →</button>
+            <div class="d-flex gap-2 flex-wrap">
+              <button v-if="resource.type === 'factsheet'" class="btn btn-outline-primary btn-sm" type="button" @click="downloadResource(resource)">Download PDF</button>
+              <button v-else class="btn btn-primary btn-sm" type="button" @click="openResource(resource)">Read more</button>
+              <button class="btn btn-outline-secondary btn-sm" type="button" @click="saveResource(resource.id)">{{ isResourceSaved(resource.id) ? 'Saved' : 'Save' }}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -70,6 +71,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import resourcesData from '../assets/json/resources.json'
+import { isResourceSaved, toggleSavedResource } from '../stores/healthbridge'
 
 const searchQuery = ref('')
 const selectedCategory = ref('')
@@ -113,5 +115,17 @@ function resetFilters() {
   searchQuery.value = ''
   selectedCategory.value = ''
   currentPage.value = 1
+}
+
+function saveResource(id) { toggleSavedResource(id) }
+function openResource(resource) { window.alert(`${resource.title}\n\n${resource.description}`) }
+function downloadResource(resource) {
+  const blob = new Blob([`${resource.title}\n\n${resource.description}`], { type: 'application/pdf' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `${resource.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.pdf`
+  link.click()
+  URL.revokeObjectURL(url)
 }
 </script>

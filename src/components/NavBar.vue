@@ -18,10 +18,19 @@
             <router-link class="nav-link" to="/resources">Health Resources</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/services">Find Services</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/appointments">Appointments</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/community/rate">Rate a Service</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/about">About Us</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/assistant">Resource Assistant</router-link>
           </li>
           <li class="nav-item" v-if="user && user.role === 'admin'">
             <router-link class="nav-link" to="/admin">Admin Dashboard</router-link>

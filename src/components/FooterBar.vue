@@ -11,6 +11,8 @@
           <ul class="list-unstyled">
             <li><router-link class="text-muted text-decoration-none" to="/">Home</router-link></li>
             <li><router-link class="text-muted text-decoration-none" to="/resources">Health Resources</router-link></li>
+            <li><router-link class="text-muted text-decoration-none" to="/services">Find Services</router-link></li>
+            <li><router-link class="text-muted text-decoration-none" to="/appointments">Appointments</router-link></li>
             <li><router-link class="text-muted text-decoration-none" to="/about">About Us</router-link></li>
             <li><router-link class="text-muted text-decoration-none" to="/login">Login</router-link></li>
           </ul>
