@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark text-light py-4 mt-5">
+  <footer class="site-footer py-4 mt-5">
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-3">
@@ -38,3 +38,31 @@
     </div>
   </footer>
 </template>
+
+<style scoped>
+.site-footer {
+  background: #20252b;
+  color: #f8fafc;
+}
+
+.site-footer :deep(.text-muted) {
+  color: #cbd5e1 !important;
+}
+
+.site-footer :deep(a.text-muted) {
+  color: #e2e8f0 !important;
+  display: inline-block;
+}
+
+.site-footer :deep(a.text-muted:hover) {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+}
+
+.site-footer :deep(a.text-muted:focus-visible) {
+  color: #ffffff !important;
+  outline: 3px solid #ffbf47;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+</style>
