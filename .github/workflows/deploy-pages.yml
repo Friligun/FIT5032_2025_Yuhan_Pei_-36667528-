@@ -31,6 +31,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
+        env:
+          VITE_ALIYUN_FUNCTION_URL: https://healthbidge-api-rjcgdwcqid.cn-hangzhou.fcapp.run
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
