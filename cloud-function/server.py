@@ -1,9 +1,45 @@
 import json
 import os
+import smtplib
+from email.message import EmailMessage
+from email.utils import parseaddr
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 MAX_BODY_BYTES = 32 * 1024
 ALLOWED_ACTIONS = {"health-assistant", "send-appointment-email", "health-check"}
+
+
+def _valid_email(value):
+    address = parseaddr(str(value or ""))[1].strip()
+    return address if address and "@" in address and " " not in address else ""
+
+
+def send_appointment_email(appointment):
+    recipient = _valid_email(appointment.get("userEmail"))
+    sender = _valid_email(os.getenv("MAIL_FROM") or os.getenv("SMTP_USER"))
+    host = os.getenv("SMTP_HOST", "smtp.qq.com")
+    password = os.getenv("SMTP_PASSWORD")
+    if not recipient or not sender or not password:
+        return {"success": False, "queued": False, "message": "Email service is not configured."}
+
+    service_name = str(appointment.get("serviceName", "Health service"))[:120]
+    date = str(appointment.get("date", ""))[:30]
+    time = str(appointment.get("time", ""))[:20]
+    notes = str(appointment.get("notes", "")).strip()[:300]
+    message = EmailMessage()
+    message["Subject"] = f"HealthBridge appointment confirmation - {service_name}"
+    message["From"] = sender
+    message["To"] = recipient
+    message.set_content(
+        "Your HealthBridge appointment has been confirmed.\\n\\n"
+        f"Service: {service_name}\\nDate: {date}\\nTime: {time}\\n"
+        f"Notes: {notes or 'None'}\\n\\n"
+        "This is an automated confirmation. Contact the service provider if you need to change the appointment."
+    )
+    with smtplib.SMTP_SSL(host, int(os.getenv("SMTP_PORT", "465")), timeout=12) as smtp:
+        smtp.login(sender, password)
+        smtp.send_message(message)
+    return {"success": True, "queued": True, "message": "Confirmation email sent.", "appointmentId": str(appointment.get("id", ""))[:80]}
 
 
 def response_payload(action, payload):
@@ -23,14 +59,10 @@ def response_payload(action, payload):
         }
     if action == "send-appointment-email":
         appointment = payload.get("appointment", {})
-        # DirectMail credentials must remain server-side. This response is an explicit
-        # integration point until the account's verified sender is configured.
-        return {
-            "success": True,
-            "queued": False,
-            "message": "Appointment received. Configure Alibaba DirectMail to send the email.",
-            "appointmentId": str(appointment.get("id", ""))[:80],
-        }
+        try:
+            return send_appointment_email(appointment)
+        except (OSError, smtplib.SMTPException, ValueError):
+            return {"success": False, "queued": False, "message": "Confirmation email could not be sent."}
     return {"success": False, "message": "Unsupported action."}
 
 

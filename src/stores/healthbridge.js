@@ -58,6 +58,7 @@ export function createAppointment({ serviceId, date, time, notes = '' }) {
     id: `APT-${Date.now()}`,
     userId: user.id,
     userName: user.fullName,
+    userEmail: user.email,
     serviceId: Number(serviceId),
     serviceName: state.services.find(service => service.id === Number(serviceId))?.name || 'Health service',
     date,

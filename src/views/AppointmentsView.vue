@@ -106,9 +106,12 @@ async function bookAppointment() {
   message.value = ''
   const result = createAppointment(form)
   success.value = result.success
-  message.value = result.success ? 'Appointment confirmed.' : result.message
+  message.value = result.success ? 'Appointment confirmed. Sending confirmation email…' : result.message
   if (result.success) {
-    await sendAppointmentEmail(result.appointment).catch(() => null)
+    const emailResult = await sendAppointmentEmail(result.appointment).catch(() => ({ success: false }))
+    message.value = emailResult.success
+      ? 'Appointment confirmed. A confirmation email was sent.'
+      : 'Appointment confirmed, but the confirmation email could not be sent.'
     Object.assign(form, { serviceId: '', date: '', time: '', notes: '' })
   }
 }
