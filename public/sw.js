@@ -1,5 +1,6 @@
-const CACHE_NAME = 'healthbridge-v1'
-const APP_SHELL = ['/', '/index.html', '/favicon.ico']
+const CACHE_NAME = 'healthbridge-v2'
+const SCOPE = new URL('./', self.location).pathname
+const APP_SHELL = [SCOPE, `${SCOPE}index.html`, `${SCOPE}favicon.ico`]
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)))
@@ -18,6 +19,6 @@ self.addEventListener('fetch', event => {
       const copy = response.clone()
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy))
       return response
-    }).catch(() => caches.match('/index.html')))
+    }).catch(() => caches.match(`${SCOPE}index.html`)))
   )
 })
